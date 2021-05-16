@@ -8,7 +8,8 @@
 </template>
 
 <script>
-import * as tf from '@tensorflow/tfjs'
+import * as tf from '@tensorflow/tfjs';
+import * as tmImage from '@teachablemachine/image';
 
 export default {
   name: 'PageIndex',
@@ -64,13 +65,6 @@ export default {
     }
   },
   created() {
-    let tensorflow = document.createElement('script');
-    tensorflow.setAttribute('src', 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js');
-    document.head.appendChild(tensorflow);
-    let teachableMachine = document.createElement('script')
-    teachableMachine.setAttribute('src',
-      'https://cdn.jsdelivr.net/npm/@teachablemachine/image@0.8/dist/teachablemachine-image.min.js')
-    document.head.appendChild(teachableMachine)
   }
 }
 </script>
