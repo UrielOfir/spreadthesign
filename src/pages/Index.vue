@@ -1,9 +1,21 @@
 <template>
   <q-page class="flex flex-center">
-    <div>זיהוי שפת הסימנים</div>
-    <button type="button" @click="init()">Start</button>
-    <div id="webcam-container"></div>
-    <div id="label-container"></div>
+    <div class="row">
+      <h3>זיהוי שפת הסימנים</h3>
+    </div>
+    <div class="break"></div>
+    <div class="row">
+      <q-btn type="button" @click="init()">Start</q-btn>
+    </div>
+    <div class="break"></div>
+    <div>
+      <div id="webcam-container"></div>
+      <div v-for="prediction in predictions" v-bind:key="prediction">
+        <q-card>
+          {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
+        </q-card>
+      </div>
+    </div>
   </q-page>
 </template>
 
@@ -19,6 +31,7 @@ export default {
       webcam: "",
       labelContainer: "",
       maxPredictions: "",
+      predictions: [],
       URL: "https://teachablemachine.withgoogle.com/models/Pfh6d3YOo/",
     }
   },
@@ -43,10 +56,6 @@ export default {
       window.requestAnimationFrame(this.loop);
       // append elements to the DOM
       document.getElementById("webcam-container").appendChild(this.webcam.canvas);
-      this.labelContainer = document.getElementById("label-container");
-      for (let i = 0; i < this.maxPredictions; i++) { // and class labels
-        this.labelContainer.appendChild(document.createElement("div"));
-      }
     },
     async loop() {
       this.webcam.update(); // update the webcam frame
@@ -56,15 +65,22 @@ export default {
 // run the webcam image through the image model
     async predict() {
       // predict can take in an image, video or canvas html element
-      const prediction = await this.model.predict(this.webcam.canvas);
-      for (let i = 0; i < this.maxPredictions; i++) {
-        const classPrediction =
-          prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-        this.labelContainer.childNodes[i].innerHTML = classPrediction;
-      }
+      this.predictions = await this.model.predict(this.webcam.canvas);
+      // for (let i = 0; i < this.maxPredictions; i++) {
+      //   const classPrediction =
+      //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
+      //   this.labelContainer.childNodes[i].innerHTML = classPrediction;
+      // }
     }
   },
   created() {
   }
 }
 </script>
+
+<style>
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+</style>
