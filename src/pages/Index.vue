@@ -15,6 +15,7 @@
           {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
         </q-card>
       </div>
+      <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a>
     </div>
   </q-page>
 </template>
