@@ -42,7 +42,7 @@ export default {
       labelContainer: "",
       maxPredictions: "",
       predictions: [],
-      URL: "https://teachablemachine.withgoogle.com/models/Pfh6d3YOo/",
+      URL: "https://teachablemachine.withgoogle.com/models/1h_dpunSf/",
     }
   },
   methods: {
