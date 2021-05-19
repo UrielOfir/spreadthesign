@@ -1,7 +1,10 @@
 <template>
+
   <q-page class="flex flex-center">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <div class="row">
-      <h3>זיהוי שפת הסימנים</h3>
+      <img src="../images/logo.png" style="width:150px" class="center">
+
     </div>
     <div class="break"></div>
     <div class="row">
@@ -15,11 +18,17 @@
           {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
         </q-card>
       </div>
-      <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a>
-    </div>
-  </q-page>
-</template>
 
+    </div>
+    <!--<div class="bg"><img src="../images/24919.jpg" ></div>-->
+
+
+
+    <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a> <!--link-->
+  </q-page>
+
+</template>
+<!--js-->
 <script>
 import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
@@ -79,9 +88,30 @@ export default {
 }
 </script>
 
+
+
+<!--css-->
 <style>
 .break {
   flex-basis: 100%;
   height: 0;
 }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+body {
+  background-image: url( "../images/4426.jpg" );
+  background-repeat: no-repeat;
+  background-size:cover;
+}
+
+
+
+
+
+
 </style>
