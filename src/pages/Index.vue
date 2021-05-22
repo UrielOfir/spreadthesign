@@ -36,7 +36,7 @@
           height="300px"
           infinite
         >
-          <!--<q-carousel-slide :name="1" img-src="../sign_images/hello.JPG"  >
+          <!--<q-carousel-slide :name="1" img-src="../sign_images/hello.jpg"  >
             <div class="absolute-bottom custom-caption">
               <div class="text-h4">שלום</div>
             </div>
@@ -47,13 +47,13 @@
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+          <q-carousel-slide :name="2" img-src="../sign_images/hello.jpg">
             <div class="absolute-bottom custom-caption">
               <div class="text-h4">שלום</div>
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+          <q-carousel-slide :name="3" img-src="../sign_images/great.png">
             <div class="absolute-bottom custom-caption">
               <div class="text-h4">שלום</div>
             </div>
