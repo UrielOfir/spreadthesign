@@ -10,31 +10,38 @@
     </div>
     <div class="break"></div>
     <div class="row">
-      <div id="webcam-container"></div>
+      <q-card>
+        <q-card-section id="webcam-container"></q-card-section>
+        <div v-for="prediction in predictions" v-bind:key="prediction.className">
+          <q-card-section>
+            {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
+          </q-card-section>
+        </div>
+      </q-card>
     </div>
     <div class="break"></div>
     <div class="row">
-      <div v-for="prediction in predictions" v-bind:key="prediction.className">
-        <q-card>
-          {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
-        </q-card>
+      <div class="q-pa-md">
+        <q-carousel
+          style="width:400px"
+          arrows
+          animated
+          v-model="slide"
+          height="400px"
+          infinite
+        >
+          <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h2">First stop</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+
+          </q-carousel-slide>
+          <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg"/>
+          <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg"/>
+        </q-carousel>
       </div>
-    </div>
-    <div class="break"></div>
-    <div class="row">
-      <q-carousel
-        style="width:400px"
-        animated
-        v-model="slide"
-        arrows
-        navigation
-        infinite
-      >
-        <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg"/>
-        <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg"/>
-        <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg"/>
-        <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg"/>
-      </q-carousel>
     </div>
 
 
@@ -57,7 +64,7 @@ export default {
       webcam: new tmImage.Webcam(200, 200, true),
       labelContainer: "",
       maxPredictions: "",
-      predictions: [{className:"", probability: 0}],
+      predictions: [{className: "", probability: 0}],
       URL: "https://teachablemachine.withgoogle.com/models/1h_dpunSf/",
     }
   },
@@ -107,11 +114,22 @@ export default {
   height: 0;
 }
 
+.my-card {
+  width: 100%;
+  max-width: 250px;
+}
+
 body {
   background-image: url("../images/4426.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
 
+.custom-caption {
+  text-align: center;
+  padding: 12px;
+  color: white;
+  background-color: rgba(0, 0, 0, .3);
+}
 
 </style>
