@@ -3,7 +3,7 @@
   <q-page class="flex flex-center">
 
     <div class="row">
-    <h4> Sign language identifier  </h4>
+      <h4> Sign language identifier </h4>
     </div>
     <div class="break"></div>
     <div class="row">
@@ -18,9 +18,16 @@
     <div class="row">
       <q-card>
         <q-card-section id="webcam-container"></q-card-section>
-        <div v-for="prediction in predictions" v-bind:key="prediction.className">
+        <div v-if="predictions.length > 0">
+          <div v-for="prediction in predictions" v-bind:key="prediction.className">
+            <q-card-section>
+              {{ prediction.className }}
+            </q-card-section>
+          </div>
+        </div>
+        <div v-else>
           <q-card-section>
-            {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
+            לא זוהתה מילה
           </q-card-section>
         </div>
       </q-card>
@@ -60,7 +67,6 @@
           </q-carousel-slide>
 
 
-
         </q-carousel> <!-- end slide-->
       </div> <!-- end class-->
     </div> <!-- end row-->
@@ -85,7 +91,7 @@ export default {
       webcam: new tmImage.Webcam(200, 200, true),
       labelContainer: "",
       maxPredictions: "",
-      predictions: [{className: "", probability: 0}],
+      predictions: [],
       URL: "https://teachablemachine.withgoogle.com/models/1h_dpunSf/",
     }
   },
@@ -105,9 +111,9 @@ export default {
       // Convenience function to setup a webcam
       // request access to the webcam
       await this.webcam.play();
+
       window.requestAnimationFrame(this.loop);
       // append elements to the DOM
-
     },
     async loop() {
       this.webcam.update(); // update the webcam frame
@@ -118,6 +124,7 @@ export default {
     async predict() {
       // predict can take in an image, video or canvas html element
       this.predictions = await this.model.predict(this.webcam.canvas);
+      this.predictions = this.predictions.filter(prediction => prediction.probability > 0.8);
     }
   },
   async created() {
@@ -152,7 +159,8 @@ body {
   color: white;
   background-color: rgba(0, 0, 0, .3);
 }
-h4{
+
+h4 {
   /*font-style: italic;*/
   font-family: "Lucida Console", "Courier New", monospace;
 }
