@@ -43,26 +43,32 @@
           height="300px"
           infinite
         >
-          <!--<q-carousel-slide :name="1" img-src="../sign_images/hello.jpg"  >
-            <div class="absolute-bottom custom-caption">
-              <div class="text-h4">שלום</div>
-            </div>
-          </q-carousel-slide> -->
-          <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+          <!--gallery-->
+          <q-carousel-slide :name="1" img-src="../sign_images/hello.jpg">
             <div class="absolute-bottom custom-caption">
               <div class="text-h4">שלום</div>
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide :name="2" img-src="../sign_images/hello.jpg">
+          <q-carousel-slide :name="2" img-src="../sign_images/great.png">
             <div class="absolute-bottom custom-caption">
-              <div class="text-h4">שלום</div>
+              <div class="text-h4">מצויין</div>
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide :name="3" img-src="../sign_images/great.png">
+          <q-carousel-slide :name="3" img-src="../sign_images/Insurance.png">
             <div class="absolute-bottom custom-caption">
-              <div class="text-h4">שלום</div>
+              <div class="text-h4">ביטוח</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="4" img-src="../sign_images/today.png">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">היום</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="5" img-src="../sign_images/who.png">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">מי</div>
             </div>
           </q-carousel-slide>
 
@@ -73,7 +79,10 @@
 
 
     <div class="break"></div>
+    <div class="row">
     <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a> <!--link-->
+    </div>
+      <div class="break"></div>
   </q-page>
 
 </template>
