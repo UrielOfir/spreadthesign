@@ -1,12 +1,18 @@
 <template>
 
   <q-page class="flex flex-center">
+
+    <div class="row">
+    <h4> Sign language recognition </h4>
+    </div>
+    <div class="break"></div>
     <div class="row">
       <img src="../images/logo.png" style="width:150px">
     </div>
     <div class="break"></div>
     <div class="row">
-      <q-btn type="button" @click="init()">Start</q-btn>
+      <q-btn color="black" type="button" @click="init()">Start</q-btn>
+
     </div>
     <div class="break"></div>
     <div class="row">
@@ -23,26 +29,41 @@
     <div class="row">
       <div class="q-pa-md">
         <q-carousel
-          style="width:400px"
+          style="width:300px"
           arrows
           animated
           v-model="slide"
-          height="400px"
+          height="300px"
           infinite
         >
-          <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg">
+          <!--<q-carousel-slide :name="1" img-src="../sign_images/hello.JPG"  >
             <div class="absolute-bottom custom-caption">
-              <div class="text-h2">First stop</div>
+              <div class="text-h4">שלום</div>
+            </div>
+          </q-carousel-slide> -->
+          <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">שלום</div>
             </div>
           </q-carousel-slide>
-          <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
 
+          <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">שלום</div>
+            </div>
           </q-carousel-slide>
-          <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg"/>
-          <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg"/>
-        </q-carousel>
-      </div>
-    </div>
+
+          <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax1.jpg">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">שלום</div>
+            </div>
+          </q-carousel-slide>
+
+
+
+        </q-carousel> <!-- end slide-->
+      </div> <!-- end class-->
+    </div> <!-- end row-->
 
 
     <div class="break"></div>
@@ -130,6 +151,10 @@ body {
   padding: 12px;
   color: white;
   background-color: rgba(0, 0, 0, .3);
+}
+h4{
+  /*font-style: italic;*/
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 
 </style>
