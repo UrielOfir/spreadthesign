@@ -3,7 +3,7 @@
   <q-page class="flex flex-center">
 
     <div class="row">
-    <h4> Sign language recognition </h4>
+    <h4> Sign language identifier  </h4>
     </div>
     <div class="break"></div>
     <div class="row">
