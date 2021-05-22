@@ -1,29 +1,44 @@
 <template>
 
   <q-page class="flex flex-center">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <div class="row">
-      <img src="../images/logo.png" style="width:150px" class="center">
-
+      <img src="../images/logo.png" style="width:150px">
     </div>
     <div class="break"></div>
     <div class="row">
       <q-btn type="button" @click="init()">Start</q-btn>
     </div>
     <div class="break"></div>
-    <div>
+    <div class="row">
       <div id="webcam-container"></div>
-      <div v-for="prediction in predictions" v-bind:key="prediction">
+    </div>
+    <div class="break"></div>
+    <div class="row">
+      <div v-for="prediction in predictions" v-bind:key="prediction.className">
         <q-card>
           {{ prediction.className }}: {{ prediction.probability.toFixed(2) }}
         </q-card>
       </div>
-
     </div>
-    <!--<div class="bg"><img src="../images/24919.jpg" ></div>-->
+    <div class="break"></div>
+    <div class="row">
+      <q-carousel
+        style="width:400px"
+        animated
+        v-model="slide"
+        arrows
+        navigation
+        infinite
+      >
+        <q-carousel-slide :name="1" img-src="https://cdn.quasar.dev/img/mountains.jpg"/>
+        <q-carousel-slide :name="2" img-src="https://cdn.quasar.dev/img/parallax1.jpg"/>
+        <q-carousel-slide :name="3" img-src="https://cdn.quasar.dev/img/parallax2.jpg"/>
+        <q-carousel-slide :name="4" img-src="https://cdn.quasar.dev/img/quasar.jpg"/>
+      </q-carousel>
+    </div>
 
 
-
+    <div class="break"></div>
     <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a> <!--link-->
   </q-page>
 
@@ -37,11 +52,12 @@ export default {
   name: 'PageIndex',
   data: function () {
     return {
+      slide: 1,
       model: "",
-      webcam: "",
+      webcam: new tmImage.Webcam(200, 200, true),
       labelContainer: "",
       maxPredictions: "",
-      predictions: [],
+      predictions: [{className:"", probability: 0}],
       URL: "https://teachablemachine.withgoogle.com/models/1h_dpunSf/",
     }
   },
@@ -59,13 +75,11 @@ export default {
       this.model = await tmImage.load(modelURL, metadataURL);
       this.maxPredictions = this.model.getTotalClasses();
       // Convenience function to setup a webcam
-      const flip = true; // whether to flip the webcam
-      this.webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
-      await this.webcam.setup(); // request access to the webcam
+      // request access to the webcam
       await this.webcam.play();
       window.requestAnimationFrame(this.loop);
       // append elements to the DOM
-      document.getElementById("webcam-container").appendChild(this.webcam.canvas);
+
     },
     async loop() {
       this.webcam.update(); // update the webcam frame
@@ -76,18 +90,14 @@ export default {
     async predict() {
       // predict can take in an image, video or canvas html element
       this.predictions = await this.model.predict(this.webcam.canvas);
-      // for (let i = 0; i < this.maxPredictions; i++) {
-      //   const classPrediction =
-      //     prediction[i].className + ": " + prediction[i].probability.toFixed(2);
-      //   this.labelContainer.childNodes[i].innerHTML = classPrediction;
-      // }
     }
   },
-  created() {
+  async created() {
+    await this.webcam.setup();
+    document.getElementById("webcam-container").appendChild(this.webcam.canvas);
   }
 }
 </script>
-
 
 
 <!--css-->
@@ -96,22 +106,12 @@ export default {
   flex-basis: 100%;
   height: 0;
 }
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
-}
 
 body {
-  background-image: url( "../images/4426.jpg" );
+  background-image: url("../images/4426.jpg");
   background-repeat: no-repeat;
-  background-size:cover;
+  background-size: cover;
 }
-
-
-
-
 
 
 </style>
