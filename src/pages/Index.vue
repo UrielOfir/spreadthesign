@@ -56,22 +56,46 @@
             </div>
           </q-carousel-slide>
 
-          <q-carousel-slide :name="3" img-src="../sign_images/Insurance.png">
+          <q-carousel-slide :name="3" img-src="../sign_images/man.png">
             <div class="absolute-bottom custom-caption">
-              <div class="text-h4">ביטוח</div>
+              <div class="text-h4">גבר</div>
             </div>
           </q-carousel-slide>
-          <q-carousel-slide :name="4" img-src="../sign_images/today.png">
+          <q-carousel-slide :name="4" img-src="../sign_images/woman.png">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">אישה</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="5" img-src="../sign_images/today.png">
             <div class="absolute-bottom custom-caption">
               <div class="text-h4">היום</div>
             </div>
           </q-carousel-slide>
-          <q-carousel-slide :name="5" img-src="../sign_images/who.png">
+          <q-carousel-slide :name="6" img-src="../sign_images/who.png">
             <div class="absolute-bottom custom-caption">
               <div class="text-h4">מי</div>
             </div>
           </q-carousel-slide>
-
+          <q-carousel-slide :name="7" img-src="../sign_images/wait.png">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">רגע</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="8" img-src="../sign_images/clear.png">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">ברור</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="9" img-src="../sign_images/sorry.jpg">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">סליחה</div>
+            </div>
+          </q-carousel-slide>
+          <q-carousel-slide :name="10" img-src="../sign_images/forbidden.jpg">
+            <div class="absolute-bottom custom-caption">
+              <div class="text-h4">אסור</div>
+            </div>
+          </q-carousel-slide>
 
         </q-carousel> <!-- end slide-->
       </div> <!-- end class-->
