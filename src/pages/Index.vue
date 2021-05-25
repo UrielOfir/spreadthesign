@@ -1,8 +1,10 @@
 <template>
 
   <q-page class="flex flex-center">
-
     <div class="row">
+      <audio id="try">
+        <source src="../assets/audio/2021-05-25-20:24:31.mp3" type="audio/mpeg">
+      </audio>
       <h4> Sign language identifier </h4>
     </div>
     <div class="break"></div>
@@ -108,7 +110,7 @@
     <div class="break"></div>
     <i class="fas fa-at"></i>
     <div class="row">
-    <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a> <!--link-->
+      <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a> <!--link-->
     </div>
     <div class="break"></div>
   </q-page>
@@ -132,9 +134,20 @@ export default {
       maxPredictions: "",
       predictions: [],
       URL: "https://teachablemachine.withgoogle.com/models/1h_dpunSf/",
+      predictStop: false,
     }
   },
   methods: {
+    playAudio(audioName) {
+      const audioObj = document.querySelector(`#${audioName}`)
+
+      audioObj.play()
+      this.predictStop = true;
+      audioObj.onended = () => {
+        this.predictStop = false;
+        console.log("ended")
+      }
+    },
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
     // Load the image model and setup the webcam
@@ -156,7 +169,9 @@ export default {
     },
     async loop() {
       this.webcam.update(); // update the webcam frame
-      await this.predict();
+      if (!this.predictStop) {
+        await this.predict();
+      }
       window.requestAnimationFrame(this.loop);
     },
 // run the webcam image through the image model
@@ -164,6 +179,7 @@ export default {
       // predict can take in an image, video or canvas html element
       this.predictions = await this.model.predict(this.webcam.canvas);
       this.predictions = this.predictions.filter(prediction => prediction.probability > 0.8);
+      this.playAudio('try');
     }
   },
   async created() {
@@ -201,7 +217,7 @@ body {
 }
 
 h4 {
-  font-family:  'Manrope', sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 </style>
