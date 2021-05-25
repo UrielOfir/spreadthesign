@@ -7,7 +7,6 @@
         </q-toolbar-title>
       </q-toolbar>
     </q-header>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -73,3 +72,8 @@ export default {
   }
 }
 </script>
+ <style>
+
+
+
+ </style>

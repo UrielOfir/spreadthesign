@@ -40,7 +40,7 @@
           arrows
           animated
           v-model="slide"
-          height="300px"
+          height="200px"
           infinite
         >
           <!--gallery-->
@@ -103,15 +103,21 @@
 
 
     <div class="break"></div>
+
+    <div class="row"></div>
+    <div class="break"></div>
+    <i class="fas fa-at"></i>
     <div class="row">
     <a href="https://sivanyesh.wixsite.com/spread-the-signs">Visit our site!</a> <!--link-->
     </div>
-      <div class="break"></div>
+    <div class="break"></div>
   </q-page>
 
 </template>
+
 <!--js-->
 <script>
+
 import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
 
@@ -184,6 +190,7 @@ body {
   background-image: url("../images/4426.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+
 }
 
 .custom-caption {
@@ -194,8 +201,7 @@ body {
 }
 
 h4 {
-  /*font-style: italic;*/
-  font-family: "Lucida Console", "Courier New", monospace;
+  font-family:  'Manrope', sans-serif;
 }
 
 </style>
