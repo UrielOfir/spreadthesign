@@ -14,6 +14,8 @@
     <div class="break"></div>
     <div class="row">
       <q-btn color="black" type="button" @click="init()">Start</q-btn>
+      <q-btn color="black" type="button" @click="stop()">Stop</q-btn>
+      <q-btn color="black" type="button" @click="webcam.play()">play</q-btn>
 
     </div>
     <div class="break"></div>
@@ -36,6 +38,7 @@
     </div>
     <div class="break"></div>
     <div class="row">
+      <div>המודל הנוכחי מזהה רק את המלים מצויין, ברור, היום</div>
      <words-carousel/>
     </div> <!-- end row-->
 
@@ -66,20 +69,20 @@ export default {
   data: function () {
     return {
       model: "",
+      canvas:"",
       webcam: new tmImage.Webcam(200, 200, true),
       labelContainer: "",
       maxPredictions: "",
       predictions: [],
-      URL: "https://teachablemachine.withgoogle.com/models/1h_dpunSf/",
+      URL: "https://teachablemachine.withgoogle.com/models/DTVQSSp5L/",
       predictStop: false,
     }
   },
   methods: {
     playAudio(audioName) {
       const audioObj = document.querySelector(`#${audioName}`)
-
-      audioObj.play()
-      this.predictStop = true;
+      // audioObj.play()
+      // this.predictStop = true;
       audioObj.onended = () => {
         this.predictStop = false;
         console.log("ended")
@@ -89,18 +92,14 @@ export default {
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
     // Load the image model and setup the webcam
     async init() {
+      await this.webcam.setup();
+      document.getElementById("webcam-container").appendChild(this.webcam.canvas);
       const modelURL = this.URL + "model.json";
       const metadataURL = this.URL + "metadata.json";
       // load the model and metadata
-      // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-      // or files from your local hard drive
-      // Note: the pose library adds "tmImage" object to your window (window.tmImage)
       this.model = await tmImage.load(modelURL, metadataURL);
       this.maxPredictions = this.model.getTotalClasses();
-      // Convenience function to setup a webcam
-      // request access to the webcam
       await this.webcam.play();
-
       window.requestAnimationFrame(this.loop);
       // append elements to the DOM
     },
@@ -117,13 +116,12 @@ export default {
       this.predictions = await this.model.predict(this.webcam.canvas);
       this.predictions = this.predictions.filter(prediction => prediction.probability > 0.8);
       this.playAudio('try');
+    },
+    stop(){
+      this.webcam.pause();
+      console.log(this.webcam)
     }
   },
-  async created() {
-    await this.webcam.setup();
-    debugger
-    document.getElementById("webcam-container").appendChild(this.webcam.canvas);
-  }
 }
 </script>
 
