@@ -2,9 +2,9 @@
 
   <q-page class="flex flex-center">
     <div class="row">
-      <audio id="try">
-        <source src="../assets/audio/2021-05-25-20:24:31.mp3" type="audio/mpeg">
-      </audio>
+<!--      <audio id="try">-->
+<!--        <source src="../assets/audio/2021-05-25-20:24:31.mp3" type="audio/mpeg">-->
+<!--      </audio>-->
       <h4> Sign language identifier </h4>
     </div>
     <div class="break"></div>
