@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated style="background-color: #26a69a">
+    <q-header elevated style="background-color: #0c0c0c">
       <q-toolbar>
         <q-toolbar-title style="color: #ffffff">
           Spread The Sign

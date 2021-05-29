@@ -13,10 +13,15 @@
     </div>
     <div class="break"></div>
     <div class="row">
-      <q-btn color="black" type="button" @click="init()">Start</q-btn>
-      <q-btn color="black" type="button" @click="stop()">Stop</q-btn>
-      <q-btn color="black" type="button" @click="webcam.play()">play</q-btn>
-
+      <pre>
+      <q-btn type="button" @click="init()">Start</q-btn>
+      </pre>
+      <pre>
+      <q-btn type="button" @click="stop()">Stop</q-btn>
+      </pre>
+      <pre>
+      <q-btn type="button" @click="webcam.play()">play</q-btn>
+      </pre>
     </div>
     <div class="break"></div>
     <div class="row">
@@ -37,14 +42,12 @@
       </q-card>
     </div>
     <div class="break"></div>
-    <div class="row">
+    <!--<div class="row">
       <div>המודל הנוכחי מזהה רק את המלים מצויין, ברור, היום</div>
      <words-carousel/>
-    </div> <!-- end row-->
-
-
-    <div class="break"></div>
-
+    </div>
+    <div class="break"></div> -->
+    <words-carousel/>
     <div class="row"></div>
     <div class="break"></div>
     <i class="fas fa-at"></i>
@@ -83,10 +86,10 @@ export default {
       const audioObj = document.querySelector(`#${audioName}`)
       // audioObj.play()
       // this.predictStop = true;
-      audioObj.onended = () => {
-        this.predictStop = false;
-        console.log("ended")
-      }
+      // audioObj.onended = () => {
+      //   this.predictStop = false;
+      //   console.log("ended")
+      // }
     },
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -139,7 +142,7 @@ export default {
 }
 
 body {
-  background-image: url("../images/4426.jpg");
+  background-image: url("../images/new.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 
@@ -153,7 +156,11 @@ body {
 }
 
 h4 {
-  font-family: 'Manrope', sans-serif;
+  /*font-family: 'Manrope', sans-serif;*/
+  font-family:'Courier New', monospace;
+  font-weight: bold;
 }
-
+.button{
+  background-color: #e7e7e7; color: black;
+}
 </style>
