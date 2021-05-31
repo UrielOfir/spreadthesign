@@ -13,15 +13,13 @@
     </div>
     <div class="break"></div>
     <div class="row">
-      <pre>
-      <q-btn type="button" @click="init()">Start</q-btn>
-      </pre>
-      <pre>
-      <q-btn type="button" @click="stop()">Stop</q-btn>
-      </pre>
-      <pre>
-      <q-btn type="button" @click="webcam.play()">play</q-btn>
-      </pre>
+
+      <q-btn type="button" class="btn" @click="init()">Start</q-btn>
+
+      <q-btn type="button" class="btn" @click="stop()">Stop</q-btn>
+
+      <q-btn type="button" class="btn" @click="webcam.play()">play</q-btn>
+
     </div>
     <div class="break"></div>
     <div class="row">
@@ -160,8 +158,8 @@ h4 {
   font-family:'Courier New', monospace;
   font-weight: bold;
 }
-.button{
+.btn{
   background-color: #e7e7e7; color: black;
-
+  margin: 10px;
 }
 </style>
