@@ -159,7 +159,7 @@ h4 {
   font-weight: bold;
 }
 .btn{
-  background-color: #e7e7e7; color: black;
+  background-color: rgba(194, 232, 232, 0.51); color: black;
   margin: 10px;
 }
 </style>
