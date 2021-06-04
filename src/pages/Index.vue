@@ -19,7 +19,8 @@
     <div class="break"></div>
     <div dir="rtl" class="row">
       <div>
-        נא לבחור האם לזהות את המלים: שלום, היום, ברור, גבר מצטער בלבד.
+        נא לבחור האם לזהות את המלים: שלום, היום, ברור, גבר מצטער/ת בלבד.
+
       </div>
     </div>
     <div class="break"></div>
@@ -44,11 +45,11 @@
     <div class="break"></div>
     <div class="row">
 
-      <q-btn type="button" class="btn" @click="init()">Start</q-btn>
+      <q-btn type="button" rounded class="btn" @click="init()">Start</q-btn>
 
-      <q-btn type="button" class="btn" @click="stop()">Stop</q-btn>
+      <q-btn type="button" rounded class="btn" @click="stop()">Stop</q-btn>
 
-      <q-btn type="button" class="btn" @click="webcam.play(); predictStop=false">play</q-btn>
+      <q-btn type="button" rounded class="btn" @click="webcam.play(); predictStop=false">play</q-btn>
 
     </div>
     <div class="break"></div>
@@ -56,14 +57,18 @@
       <q-card>
         <q-card-section id="webcam-container"></q-card-section>
         <div v-if="prediction">
+          <div class="font_size">
           <q-card-section>
             {{ prediction.className }}
           </q-card-section>
+          </div>
         </div>
         <div v-else>
+          <div class="font_size2">
           <q-card-section>
             לא זוהתה מילה
           </q-card-section>
+          </div>
         </div>
       </q-card>
     </div>
@@ -146,7 +151,7 @@ export default {
       // predict can take in an image, video or canvas html element
       this.predictions = await this.model.predict(this.webcam.canvas);
       this.prediction = this.predictions.find(prediction => prediction.probability > 0.8);
-      this.playAudio('metzuian');
+     /* this.playAudio('metzuian');*/
     },
     stop() {
       this.webcam.pause();
@@ -193,5 +198,18 @@ h4 {
   background-color: rgba(194, 232, 232, 0.51);
   color: black;
   margin: 10px;
+  padding: 1px;
+}
+.font_size{
+  font-weight: bold;
+  font-size: 25px;
+  color: #01579b;
+  text-align: center;
+}
+.font_size2{
+  font-weight: bold;
+  font-size: 25px;
+  color: #e80202;
+  text-align: center;
 }
 </style>
