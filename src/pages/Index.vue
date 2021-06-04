@@ -1,6 +1,11 @@
 <template>
 
   <q-page class="flex flex-center">
+    <div>
+      <audio id="metzuian">
+        <source src="../assets/audio/metzuian.mp3" type="audio/mpeg">
+      </audio>
+    </div>
     <div class="row">
 <!--      <audio id="try">-->
 <!--        <source src="../assets/audio/2021-05-25-20:24:31.mp3" type="audio/mpeg">-->
@@ -12,25 +17,48 @@
       <img src="../images/logo.png" style="width:150px">
     </div>
     <div class="break"></div>
+    <div dir="rtl" class="row">
+      <div>
+        נא לבחור האם לזהות את המלים: שלום, היום, ברור, גבר מצטער בלבד.
+      </div>
+    </div>
+    <div class="break"></div>
+    <div class="row">
+      <q-btn-toggle
+        v-model="onlyFiveWords"
+        class="my-custom-toggle"
+        no-caps
+        rounded
+        unelevated
+        toggle-color="primary"
+        color="white"
+        text-color="primary"
+        :options="[
+          {label: 'חמש מלים', value: true},
+          {label: 'כל המלים', value: false}
+        ]"
+        @click="init()"
+      />
+    </div>
+
+    <div class="break"></div>
     <div class="row">
 
       <q-btn type="button" class="btn" @click="init()">Start</q-btn>
 
       <q-btn type="button" class="btn" @click="stop()">Stop</q-btn>
 
-      <q-btn type="button" class="btn" @click="webcam.play()">play</q-btn>
+      <q-btn type="button" class="btn" @click="webcam.play(); predictStop=false">play</q-btn>
 
     </div>
     <div class="break"></div>
     <div class="row">
       <q-card>
         <q-card-section id="webcam-container"></q-card-section>
-        <div v-if="predictions.length > 0">
-          <div v-for="prediction in predictions" v-bind:key="prediction.className">
-            <q-card-section>
-              {{ prediction.className }}
-            </q-card-section>
-          </div>
+        <div v-if="prediction">
+          <q-card-section>
+            {{ prediction.className }}
+          </q-card-section>
         </div>
         <div v-else>
           <q-card-section>
@@ -40,11 +68,6 @@
       </q-card>
     </div>
     <div class="break"></div>
-    <!--<div class="row">
-      <div>המודל הנוכחי מזהה רק את המלים מצויין, ברור, היום</div>
-     <words-carousel/>
-    </div>
-    <div class="break"></div> -->
     <words-carousel/>
     <div class="row"></div>
     <div class="break"></div>
@@ -70,24 +93,30 @@ export default {
   data: function () {
     return {
       model: "",
-      canvas:"",
+      canvas: "",
       webcam: new tmImage.Webcam(400, 400, true),
       labelContainer: "",
       maxPredictions: "",
       predictions: [],
+      prediction: null,
       URL: "https://teachablemachine.withgoogle.com/models/DTVQSSp5L/",
+      URL10: "https://teachablemachine.withgoogle.com/models/DTVQSSp5L/",
+      URL5: "https://teachablemachine.withgoogle.com/models/USMunKY-N/",
       predictStop: false,
+      soundPlaying: false,
+      onlyFiveWords: false,
     }
   },
+
   methods: {
-    playAudio(audioName) {
+    async playAudio(audioName) {
       const audioObj = document.querySelector(`#${audioName}`)
-      // audioObj.play()
-      // this.predictStop = true;
-      // audioObj.onended = () => {
-      //   this.predictStop = false;
-      //   console.log("ended")
-      // }
+      audioObj.play()
+      this.soundPlaying = true;
+      audioObj.onended = () => {
+        this.soundPlaying = false;
+        console.log("ended")
+      }
     },
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
@@ -95,6 +124,7 @@ export default {
     async init() {
       await this.webcam.setup();
       document.getElementById("webcam-container").appendChild(this.webcam.canvas);
+      this.URL = this.onlyFiveWords ? this.URL5 : this.URL10;
       const modelURL = this.URL + "model.json";
       const metadataURL = this.URL + "metadata.json";
       // load the model and metadata
@@ -106,7 +136,7 @@ export default {
     },
     async loop() {
       this.webcam.update(); // update the webcam frame
-      if (!this.predictStop) {
+      if (!this.predictStop && !this.soundPlaying) {
         await this.predict();
       }
       window.requestAnimationFrame(this.loop);
@@ -115,12 +145,12 @@ export default {
     async predict() {
       // predict can take in an image, video or canvas html element
       this.predictions = await this.model.predict(this.webcam.canvas);
-      this.predictions = this.predictions.filter(prediction => prediction.probability > 0.8);
-      this.playAudio('try');
+      this.prediction = this.predictions.find(prediction => prediction.probability > 0.8);
+      this.playAudio('metzuian');
     },
-    stop(){
+    stop() {
       this.webcam.pause();
-      console.log(this.webcam)
+      this.predictStop = true;
     }
   },
 }
@@ -155,11 +185,13 @@ body {
 
 h4 {
   /*font-family: 'Manrope', sans-serif;*/
-  font-family:'Courier New', monospace;
+  font-family: 'Courier New', monospace;
   font-weight: bold;
 }
-.btn{
-  background-color: rgba(194, 232, 232, 0.51); color: black;
+
+.btn {
+  background-color: rgba(194, 232, 232, 0.51);
+  color: black;
   margin: 10px;
 }
 </style>
