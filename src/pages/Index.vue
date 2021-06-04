@@ -71,7 +71,7 @@ export default {
     return {
       model: "",
       canvas:"",
-      webcam: new tmImage.Webcam(200, 200, true),
+      webcam: new tmImage.Webcam(400, 400, true),
       labelContainer: "",
       maxPredictions: "",
       predictions: [],
