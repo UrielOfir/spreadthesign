@@ -152,19 +152,20 @@ export default {
     }
   },
 
-  computed: mapState("data", ['hello']),
+  computed: mapState("data", ['audioDocument']),
 
   methods: {
     playAudio(audioName) {
       const audioObj = document.querySelector(`#${audioName}`)
       audioObj.play()
-      this.stop();
-      audioObj.onended = () => {}
+    //   audioObj.onended = () => {}
     },
+
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
     // Load the image model and setup the webcam
     async init() {
+      debugger
       this.active = 'play';
       await this.webcam.setup();
       document.getElementById("webcam-container").appendChild(this.webcam.canvas);
@@ -231,7 +232,5 @@ export default {
     }
   },
 
-
 }
 </script>
-
