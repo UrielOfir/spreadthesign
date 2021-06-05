@@ -5,7 +5,9 @@
         <q-toolbar-title style="color: #ffffff">
           Spread The Sign
         </q-toolbar-title>
+        <img src="../sign_images/symbol.png" style="width:50px">
       </q-toolbar>
+
     </q-header>
     <q-page-container>
       <router-view />

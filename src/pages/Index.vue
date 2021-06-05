@@ -1,5 +1,5 @@
 <template>
-<!--new commit-->
+  <!--new commit-->
   <q-page class="flex flex-center">
     <div>
       <audio id="asur">
@@ -33,14 +33,12 @@
         <source src="../assets/audio/shalom.mp3" type="audio/mpeg">
       </audio>
     </div>
+      <img src="../images/logo.png" style="width:150px">
     <div class="row">
       <h4> Sign language identifier </h4>
     </div>
     <div class="break"></div>
-    <div class="row">
-      <img src="../images/logo.png" style="width:150px">
-    </div>
-    <div class="break"></div>
+
     <div dir="rtl" class="row">
       <div>
         נא לבחור האם לזהות את המלים: שלום, היום, ברור, גבר מצטער/ת בלבד.
@@ -69,7 +67,7 @@
     <div class="break"></div>
     <div class="row">
 
-      <q-btn type="button" rounded class="btn" @click="init()">Start</q-btn>
+      <q-btn type="button" rounded class="btn" @click="init()">Start</q-btn> <!-- when press go to function init-->
 
       <q-btn type="button" rounded class="btn" v-bind:class="{active: active=='stop'}" @click="stop()">Stop</q-btn>
 
@@ -111,7 +109,6 @@
 
 <!--js-->
 <script>
-
 import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
 import wordsCarousel from "components/wordsCarousel";
@@ -152,11 +149,9 @@ export default {
     }
   },
 
-  computed: mapState("data", ['audioDocument']),
-
   methods: {
-    playAudio(audioName) {
-      const audioObj = document.querySelector(`#${audioName}`)
+    playAudio(audioName) { //get a string of word
+      const audioObj = document.querySelector(`#${audioName}`) //creat object that play word audio
       audioObj.play()
     //   audioObj.onended = () => {}
     },
@@ -164,55 +159,53 @@ export default {
     // More API functions here:
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
     // Load the image model and setup the webcam
-    async init() {
-      debugger
+    async init() {   //for start
       this.active = 'play';
-      await this.webcam.setup();
-      document.getElementById("webcam-container").appendChild(this.webcam.canvas);
-      this.URL = this.onlyFiveWords ? this.URL5 : this.URL10;
+      await this.webcam.setup();// set the camera
+      document.getElementById("webcam-container").appendChild(this.webcam.canvas);//open the camara
+      this.URL = this.onlyFiveWords ? this.URL5 : this.URL10; //choose which model to use
       const modelURL = this.URL + "model.json";
       const metadataURL = this.URL + "metadata.json";
       // load the model and metadata
       this.model = await tmImage.load(modelURL, metadataURL);
-      this.maxPredictions = this.model.getTotalClasses();
+      this.maxPredictions = this.model.getTotalClasses();//amount of pred
       await this.webcam.play();
       window.requestAnimationFrame(this.loop);
       // append elements to the DOM
     },
     async loop() {
-      this.webcam.update(); // update the webcam frame
+      this.webcam.update(); // update the webcam frame //catch a frame
       if (!this.predictStop) {
-        await this.predict();
+        await this.predict(); // identify the image
       }
-      window.requestAnimationFrame(this.loop);
+      window.requestAnimationFrame(this.loop); //keep p
     },
 // run the webcam image through the image model
     async predict() {
       // predict can take in an image, video or canvas html element
-      this.predictions = await this.model.predict(this.webcam.canvas);
-      this.prediction = await this.predictions.find(prediction => prediction.probability > 0.8);
+      this.predictions = await this.model.predict(this.webcam.canvas); //creat array of all classes and pred %
+      this.prediction = await this.predictions.find(prediction => prediction.probability > 0.8);//want only on pred
       if (this.prediction) {
-        this.predictionsArr.push(this.prediction.className)
+        this.predictionsArr.push(this.prediction.className) //check the Identification
       }
-      if (this.predictionsArr.length > 20) {
-        this.prediction.className = this.mode(this.predictionsArr);
+      if (this.predictionsArr.length > 20) { //after 20 frame in array try do identify
+        this.prediction.className = this.mode(this.predictionsArr); //call mode
         this.stop()
-        this.playAudio(this.audioHashMap[this.prediction.className]);
+        this.playAudio(this.audioHashMap[this.prediction.className]);//go to playAudio with string in english
         this.predictionsArr=[];
       }
-
     },
     stop() {
       this.webcam.pause();
-      this.predictStop = true;
-      this.active = 'stop';
+      this.predictStop = true; //tell the pred to stop
+      this.active = 'stop';  //the button red
     },
     play() {
       this.webcam.play();
       this.predictStop = false
       this.active = 'play';
     },
-    mode(array) {
+    mode(array) { //return the string that in the array the max times
       if (array.length == 0)
         return null;
       let modeMap = {};
@@ -230,7 +223,65 @@ export default {
       }
       return maxEl;
     }
-  },
+  }, //end methods
+
 
 }
 </script>
+
+
+<!--css-->
+<style>
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.my-card {
+  width: 100%;
+  max-width: 250px;
+}
+
+body {
+  background-image: url("../images/world.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+.custom-caption {
+  text-align: center;
+  padding: 12px;
+  color: white;
+  background-color: rgba(0, 0, 0, .3);
+}
+
+h4 {
+  font-family:  Arial;
+}
+
+.btn {
+  background-color: #9ddfe8;
+  color: black;
+  margin: 10px;
+  padding: 1px;
+}
+
+.font_size {
+  font-weight: bold;
+  font-size: 25px;
+  color: #01579b;
+  text-align: center;
+}
+
+.font_size2 {
+  font-weight: bold;
+  font-size: 25px;
+  color: #e80202;
+  text-align: center;
+}
+
+.active {
+  background-color: #C10015;
+  font-weight: bold;
+}
+</style>
