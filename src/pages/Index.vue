@@ -116,6 +116,8 @@ import * as tf from '@tensorflow/tfjs';
 import * as tmImage from '@teachablemachine/image';
 import wordsCarousel from "components/wordsCarousel";
 
+import {mapState} from 'vuex';
+
 export default {
   name: 'PageIndex',
   components: {wordsCarousel},
@@ -149,6 +151,8 @@ export default {
       }
     }
   },
+
+  computed: mapState("data", ['hello']),
 
   methods: {
     playAudio(audioName) {
@@ -231,62 +235,3 @@ export default {
 }
 </script>
 
-
-<!--css-->
-<style>
-.break {
-  flex-basis: 100%;
-  height: 0;
-}
-
-.my-card {
-  width: 100%;
-  max-width: 250px;
-}
-
-body {
-  background-image: url("../images/new.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-
-}
-
-.custom-caption {
-  text-align: center;
-  padding: 12px;
-  color: white;
-  background-color: rgba(0, 0, 0, .3);
-}
-
-h4 {
-  /*font-family: 'Manrope', sans-serif;*/
-  font-family: 'Courier New', monospace;
-  font-weight: bold;
-}
-
-.btn {
-  background-color: rgba(194, 232, 232, 0.51);
-  color: black;
-  margin: 10px;
-  padding: 1px;
-}
-
-.font_size {
-  font-weight: bold;
-  font-size: 25px;
-  color: #01579b;
-  text-align: center;
-}
-
-.font_size2 {
-  font-weight: bold;
-  font-size: 25px;
-  color: #e80202;
-  text-align: center;
-}
-
-.active {
-  background-color: #C10015;
-  font-weight: bold;
-}
-</style>
