@@ -39,29 +39,29 @@
     </div>
     <div class="break"></div>
 
-    <div dir="rtl" class="row">
-      <div>
-        נא לבחור האם לזהות את המלים: שלום, היום, ברור, גבר מצטער/ת בלבד.
+<!--    <div dir="rtl" class="row">-->
+<!--      <div>-->
+<!--        נא לבחור האם לזהות את המלים: שלום, היום, ברור, גבר מצטער/ת בלבד.-->
 
-      </div>
-    </div>
+<!--      </div>-->
+<!--    </div>-->
     <div class="break"></div>
     <div class="row">
-      <q-btn-toggle
-        v-model="onlyFiveWords"
-        class="my-custom-toggle"
-        no-caps
-        rounded
-        unelevated
-        toggle-color="primary"
-        color="white"
-        text-color="primary"
-        :options="[
-          {label: 'חמש מלים', value: true},
-          {label: 'כל המלים', value: false}
-        ]"
-        @click="init()"
-      />
+<!--      <q-btn-toggle-->
+<!--        v-model="onlyFiveWords"-->
+<!--        class="my-custom-toggle"-->
+<!--        no-caps-->
+<!--        rounded-->
+<!--        unelevated-->
+<!--        toggle-color="primary"-->
+<!--        color="white"-->
+<!--        text-color="primary"-->
+<!--        :options="[-->
+<!--          {label: 'חמש מלים', value: true},-->
+<!--          {label: 'כל המלים', value: false}-->
+<!--        ]"-->
+<!--        @click="init()"-->
+<!--      />-->
     </div>
 
     <div class="break"></div>
@@ -128,7 +128,7 @@ export default {
       maxPredictions: "",
       predictions: [],
       prediction: null,
-      URL: "https://teachablemachine.withgoogle.com/models/DTVQSSp5L/",
+      URL: "https://teachablemachine.withgoogle.com/models/USMunKY-N/",
       URL10: "https://teachablemachine.withgoogle.com/models/DTVQSSp5L/",
       URL5: "https://teachablemachine.withgoogle.com/models/USMunKY-N/",
       predictStop: false,
@@ -163,12 +163,12 @@ export default {
       this.active = 'play';
       await this.webcam.setup();// set the camera
       document.getElementById("webcam-container").appendChild(this.webcam.canvas);//open the camara
-      this.URL = this.onlyFiveWords ? this.URL5 : this.URL10; //choose which model to use
+      // this.URL = this.onlyFiveWords ? this.URL5 : this.URL10; //choose which model to use
       const modelURL = this.URL + "model.json";
       const metadataURL = this.URL + "metadata.json";
       // load the model and metadata
       this.model = await tmImage.load(modelURL, metadataURL);
-      this.maxPredictions = this.model.getTotalClasses();//amount of pred
+      this.maxPredictions = this.model.getTotalClasses(); //amount of pred
       await this.webcam.play();
       window.requestAnimationFrame(this.loop);
       // append elements to the DOM

@@ -53,7 +53,7 @@
       </q-carousel-slide>
       <q-carousel-slide :name="9" img-src="../sign_images/sorry.jpg">
         <div class="absolute-bottom custom-caption">
-          <div class="text-h4">סליחה</div>
+          <div class="text-h4">מצטער</div>
         </div>
       </q-carousel-slide>
       <q-carousel-slide :name="10" img-src="../sign_images/forbidden.jpg">
